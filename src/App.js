@@ -6,46 +6,21 @@
  */
 
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { createStore } from 'redux';
 import { Button } from 'antd-mobile';
+import { connect } from 'react-redux';
 
-class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {name:'yyyyy'}
-  }
-  getInitialState() {
-
-  }
-  componentWillMount(preState){
-    this.setState({name:'yyyyy2'})
-  }
+class App extends React.Component {
   render(){
     return (
       <div>
-        <Button type='primary'>按钮</Button>
+        <Button type='primary'>Add</Button>
+        <Button type='primary'>Decrease</Button>
       </div>
     )
   }
   componentDidMount() {
     console.log('组件马上加载');
   }
-  componentWillReceiveProps(nextProps) {
-
-  }
-  shouldComponentUpdate(nextProps, nextState) {
-
-  }
-  componentWillUpdate(){
-
-  }
-  componentDidUpdate(){
-
-  }
-  conponentWillUnmount(){
-
-  }
 }
-export default App;
+export default App

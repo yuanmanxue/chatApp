@@ -7,15 +7,6 @@
 
 import { createStore } from 'redux'
 
-function counter(state=0, action) {
-  switch (action.type) {
-    case 'add' :
-      return state+1
-    case 'desc':
-      return state-1
-    default:
-      return 100
-  }
-}
+
 const store = createStore(counter)
 export default store

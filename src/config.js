@@ -1,3 +1,10 @@
+/**
+ * @Author: yuanmanxue
+ * @Date:   2018-02-06 08:56:59
+ * @Last modified by:   yuanmanxue
+ * @Last modified time: 2018-02-06 02:35:18
+ */
+
 import axios from 'axios';
 import { Toast } from 'antd-mobile'
 
@@ -14,9 +21,7 @@ axios.interceptors.request.use(function (config) {
 // 添加响应拦截器
 axios.interceptors.response.use(function (response) {
     // 对响应数据做点什么
-    setTimeout(function(){
-      Toast.hide();
-    },3000)
+    Toast.hide();
     return response;
   }, function (error) {
     // 对响应错误做点什么

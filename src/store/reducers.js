@@ -2,11 +2,11 @@
  * @Author: yuanmanxue
  * @Date:   2018-02-02 04:29:12
  * @Last modified by:   yuanmanxue
- * @Last modified time: 2018-02-02 05:16:53
+ * @Last modified time: 2018-02-06 04:53:26
  */
 import { combineReducers } from 'redux';
-import {auth} from './user.redux.js';
+import {user} from './user.redux.js';
 const reducers = combineReducers({
-  auth
+  user
 })
 export default reducers

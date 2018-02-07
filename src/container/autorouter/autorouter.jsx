@@ -2,7 +2,7 @@
  * @Author: yuanmanxue
  * @Date:   2018-02-06 02:55:42
  * @Last modified by:   yuanmanxue
- * @Last modified time: 2018-02-06 03:33:51
+ * @Last modified time: 2018-02-07 02:20:47
  */
  import React, { Component } from 'react';
  import axios from 'axios';
@@ -22,7 +22,6 @@
      }
      // 获取用户信息
      axios.get('/user/info').then(res => {
-       console.log(this.props)
        if(res.status == 200) {
          if(res.data.code == 0) {
            // 有登录信息

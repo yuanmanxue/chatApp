@@ -2,17 +2,18 @@
  * @Author: yuanmanxue
  * @Date:   2018-02-06 02:51:10
  * @Last modified by:   yuanmanxue
- * @Last modified time: 2018-02-06 05:12:54
+ * @Last modified time: 2018-02-07 03:44:34
  */
 /**
   * @Author: yuanmanxue
   * @Date:   2018-02-06 08:56:59
  * @Last modified by:   yuanmanxue
- * @Last modified time: 2018-02-06 05:12:54
+ * @Last modified time: 2018-02-07 03:44:34
   */
 
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import axios from 'axios'
 // import { Redirect } from 'react-router-dom';
 import {
   WingBlank,
@@ -22,17 +23,12 @@ import {
   Button,
   Radio
 } from 'antd-mobile';
-import {setUser, setPwd, serRepeatPwd, setType} from '../../store/user.redux.js';
+import {register} from '../../store/user.redux.js';
 import Logo from '../../components/logo/logo.jsx';
 
-// import axios from 'axios';
-
-// import {login,getUserData} from '../../store/user.redux.js';
-
-// @connect(state=>state.auth,{login,getUserData})
 
 const RadioItem = Radio.RadioItem;
-@connect(state => state.user, {setUser, setPwd, serRepeatPwd, setType})
+@connect(state => state.user, {register})
 class Register extends React.Component {
   constructor(props) {
     super(props)
@@ -46,8 +42,6 @@ class Register extends React.Component {
   }
   handleUser(key, value) {
     this.setState({[key]: value})
-    this.props.setUser(key, value)
-    // console.log(this.state)
   }
   handlePwd(key, value) {
     this.setState({[key]: value})
@@ -59,7 +53,7 @@ class Register extends React.Component {
     this.setState({[key]: value})
   }
   handleRegister() {
-    console.log(this.state)
+    this.props.register(this.state)
   }
   render() {
     return (

@@ -2,7 +2,7 @@
  * @Author: yuanmanxue
  * @Date:   2018-02-06 08:56:59
  * @Last modified by:   yuanmanxue
- * @Last modified time: 2018-02-06 05:33:06
+ * @Last modified time: 2018-02-07 05:35:01
  */
 
 import React, {Component} from 'react';
@@ -11,35 +11,46 @@ import {Redirect} from 'react-router-dom';
 import {WingBlank, WhiteSpace, List, InputItem, Button} from 'antd-mobile';
 import axios from 'axios';
 
-// import {setUser,setPwd,serRepeatPwd,setType} from '../../store/user.redux.js';
+import {login} from '../../store/user.redux.js';
 import Logo from '../../components/logo/logo.jsx';
-//
-// @connect(state=>state.user,{setUser,setPwd,serRepeatPwd,setType})
+
+@connect(state => state.user, {login})
 class Login extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      data: {}
+      user: '',
+      pwd: ''
     }
+    this.handleLogin = this.handleLogin.bind(this)
+    this.register = this.register.bind(this)
   }
-
-  componentDidMount() {
-    // this.props.getUserData()
+  handleChange(key,value) {
+    this.setState({
+      [key]:value
+    })
   }
-
+  handleLogin() {
+    console.log(this.state)
+    this.props.login(this.state)
+  }
+  register(){
+    this.props.history.push('/register')
+  }
   render() {
-    console.log(this.props.isAuth);
     return (
       <div>
         <Logo></Logo>
-        {/* {this.props.isAuth ? <Redirect to="/" /> : null} */}
+      {this.props.isAuth ? <Redirect to={this.props.redirectTo} /> : null}
         <WingBlank>
           <List>
-            <InputItem>用户：</InputItem>
-            <InputItem type="password">密码：</InputItem>
+            <InputItem onChange={v=>this.handleChange('user',v)}>用户：</InputItem>
+          <InputItem type="password" onChange={v=>this.handleChange('pwd',v)}>密码：</InputItem>
           </List>
           <WhiteSpace/>
-          <Button type="primary">登录</Button>
+          <Button type="primary" onClick={this.handleLogin}>登录</Button>
+        <WhiteSpace/>
+          <Button type="primary" onClick={this.register}>注册</Button>
         </WingBlank>
       </div>
     );

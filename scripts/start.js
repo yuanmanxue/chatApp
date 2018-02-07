@@ -1,3 +1,10 @@
+/**
+ * @Author: yuanmanxue
+ * @Date:   2018-02-06 08:56:59
+ * @Last modified by:   yuanmanxue
+ * @Last modified time: 2018-02-07 02:16:21
+ */
+
 'use strict';
 
 // Do this as the first thing so that any code reading it knows the right env.
@@ -40,7 +47,7 @@ if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
 }
 
 // Tools like Cloud9 rely on this.
-const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000;
+const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 8080;
 const HOST = process.env.HOST || '0.0.0.0';
 
 if (process.env.HOST) {

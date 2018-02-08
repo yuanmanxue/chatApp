@@ -2,7 +2,7 @@
  * @Author: yuanmanxue
  * @Date:   2018-02-06 08:56:59
  * @Last modified by:   yuanmanxue
- * @Last modified time: 2018-02-07 02:16:21
+ * @Last modified time: 2018-02-08 02:41:22
  */
 
 'use strict';
@@ -47,7 +47,7 @@ if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
 }
 
 // Tools like Cloud9 rely on this.
-const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 8080;
+const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000;
 const HOST = process.env.HOST || '0.0.0.0';
 
 if (process.env.HOST) {

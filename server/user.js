@@ -2,15 +2,19 @@
  * @Author: yuanmanxue
  * @Date:   2018-02-06 03:06:17
  * @Last modified by:   yuanmanxue
- * @Last modified time: 2018-02-07 05:19:04
+ * @Last modified time: 2018-02-08 04:21:46
  */
 const express = require('express')
+const utils = require('utility')
 const Router = express.Router()
 const model = require('./model')
 const User = model.getModel('user')
+const _filter = {'pwd':0,'__v':0}
+
 Router.get('/list', function(req, res) {
-  User.find({}, function(err, doc) {
-    return res.json(doc)
+  const {type} = req.query
+  User.find({type}, function(err, doc) {
+    return res.json({code:0,doc})
   })
 })
 Router.post('/register',function(req,res) {
@@ -23,42 +27,66 @@ Router.post('/register',function(req,res) {
         msg:'用户名重复'
       })
     }
-    User.create({user,pwd,type},function(err,doc) {
-        if(err) {
-          return res.json({
-            code:1,
-            msg:'后端数据操作失误'
-          })
-        }
-        return res.json({
-          code:0
-        })
-      })
+    const userModel = new User({user,type,pwd:md5Pwd(pwd)})
+    userModel.save(function(e,d){
+      if (e) {
+        return res.json({code:1,msg:'后端出错了'})
+      }
+      const {user, type, _id} = d
+      res.cookie('userid', _id)
+      return res.json({code:0,data:{user, type, _id}})
+    })
   })
 })
 Router.post('/login',function(req,res){
   const {user,pwd} = req.body
   console.log(req.body)
-  User.findOne({user},function(err,doc){
-    console.log(doc)
-    if(doc) {
-      if(doc.pwd == pwd) {
-        return res.json({
-          code:0,
-          data:doc
-        })
-      }
-    } else {
-      return res.json({
-        code:1,
-        msg:'输入的密码不存在或者错误'
-      })
+  User.findOne({user,pwd:md5Pwd(pwd)},_filter,function(err,doc){
+    if(!doc) {
+      return res.json({code:1,msg:'用户名或者密码错误'})
     }
+    res.cookie('userid', doc._id)
+		return res.json({code:0,data:doc})
   })
 })
-Router.get('/info', function(req, res) {
-  // 用户有没有cookie
-  return res.json({code: 1})
+Router.post('/update',function(req,res){
+	const userid = req.cookies.userid
+	if (!userid) {
+		return res.json({code:1,msg:'没有cookie'})
+	}
+	const body = req.body
+  console.log(body)
+	User.findByIdAndUpdate(userid,body,function(err,doc){
+		const data = Object.assign({},{
+			user:doc.user,
+			type:doc.type
+		},body)
+		return res.json({code:0,data})
+	})
 })
+
+
+Router.get('/info',function(req, res){
+	const {userid} = req.cookies
+	if (!userid) {
+		return res.json({code:1,msg:'没有cookie'})
+	}
+	User.findOne({_id:userid} ,_filter , function(err,doc){
+		if (err) {
+			return res.json({code:1, msg:'后端出错了'})
+		}
+		if (doc) {
+			return res.json({code:0,data:doc})
+		}
+	})
+	// 用户有没有cookie
+
+})
+
+
+  function md5Pwd(pwd){
+  	const salt = 'imooc_is_good_3957x8yza6!@#IUHJh~~'
+  	return utils.md5(utils.md5(pwd+salt))
+  }
 
 module.exports = Router

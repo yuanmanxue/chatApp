@@ -14,7 +14,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import axios from 'axios'
-// import { Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import {
   WingBlank,
   WhiteSpace,
@@ -58,12 +58,13 @@ class Register extends React.Component {
   render() {
     return (
       <div>
+        {this.props.isRegister ? <Redirect to="/login"></Redirect> : null}
         <Logo></Logo>
         <WingBlank>
           <List>
-            <InputItem onChange={v => this.handleUser('user', v)}>用户：</InputItem>
-            <InputItem type="password" onChange={v => this.handlePwd('pwd', v)}>密码：</InputItem>
-            <InputItem type="password" onChange={v => this.handleRepeatPwd('repeatpwd', v)}>确认密码：</InputItem>
+            <InputItem onChange={v => this.handleUser('user', v)} clear={this.props.msg}>用户：</InputItem>
+            <InputItem type="password" onChange={v => this.handlePwd('pwd', v)} clear={this.props.msg}>密码：</InputItem>
+            <InputItem type="password" onChange={v => this.handleRepeatPwd('repeatpwd', v)} clear={this.props.msg}>确认密码：</InputItem>
             <RadioItem checked={this.state.type == 'genius'} onChange={v => this.handleChange('type', 'genius')}>牛人</RadioItem>
             <RadioItem checked={this.state.type == 'boss'} onChange={v => this.handleChange('type', 'boss')}>BOSS</RadioItem>
           </List>

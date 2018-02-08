@@ -20,7 +20,7 @@ app.use(bodyParser.json())
 app.use(cookieParser())
 app.use('/user',userRouter)
 app.get('/',function(req,res){
-  res.send('<h1>fff</h1>')
+  res.send('<h1>ffffffffggg</h1>')
 })
 app.listen(9000,function(){
   console.log('node start server 9000!');

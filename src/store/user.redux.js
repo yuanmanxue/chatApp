@@ -6,6 +6,7 @@
  */
 
 import axios from 'axios'
+import {Toast} from 'antd-mobile'
 import {getRedirectPath} from './util.js'
 
 const REGISTER_SUCCESS = 'REGISTER_SUCCESS'
@@ -14,6 +15,7 @@ const ERROE_MSG = 'ERROE_MSG'
 const initState = {
   redirectTo:'',
   isAuth: false,
+  isRegister: false,
   user: '',
   pwd: '',
   repeatpwd: '',
@@ -26,24 +28,26 @@ export function user(state = initState, action) {
     case REGISTER_SUCCESS:
       return {
         ...state,
-        isAuth: true,
+        isRegister: true,
+        isAuth: false,
         msg: '',
-        redirectTo:getRedirectPath(action.payload),
+        redirectTo:getRedirectPath(action.playload),
         ...action.playload
       }
     case LOGIN_SUCCESS:
       return {
         ...state,
+        isRegister: true,
         isAuth: true,
         msg: '',
-        redirectTo:getRedirectPath(action.payload),
+        redirectTo:getRedirectPath(action.playload),
         ...action.playload
       }
     case ERROE_MSG:
       return {
         ...state,
         isAuth: false,
-        mag: action.msg
+        msg: action.msg
       }
     default:
       return state
@@ -60,7 +64,10 @@ export function register({user, pwd, repeatpwd, type}) {
   return dispatch => {
     axios.post('/user/register', {user, pwd, type}).then(res => {
       if (res.status == 200 && res.data.code == 0) {
-        dispatch(registerSuccess({user, pwd, type}))
+        Toast.success('注册成功！',1,null,true)
+        setTimeout(() => {
+          dispatch(registerSuccess({user, pwd, type}))
+        },1000)
       } else {
         dispatch(errorMsg(res.data.msg))
       }
@@ -74,8 +81,10 @@ export function login({user, pwd}) {
   return dispatch => {
     axios.post('/user/login', {user, pwd}).then(res => {
       if (res.status == 200 && res.data.code == 0) {
-        console.log(res.data.data)
-        dispatch(loginSuccess(res.data.data))
+        Toast.success('登录成功！',1,null,true)
+        setTimeout(()=> {
+          dispatch(loginSuccess(res.data.data))
+        },1000)
       } else {
         dispatch(errorMsg(res.data.msg))
       }
@@ -83,6 +92,7 @@ export function login({user, pwd}) {
   }
 }
 function errorMsg(msg) {
+  Toast.fail(msg,2,null,true)
   return {msg, type: ERROE_MSG}
 }
 function registerSuccess(data) {

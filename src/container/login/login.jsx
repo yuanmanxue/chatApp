@@ -8,7 +8,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
-import {WingBlank, WhiteSpace, List, InputItem, Button} from 'antd-mobile';
+import {WingBlank, WhiteSpace, List, InputItem, Button,Icon} from 'antd-mobile';
 import axios from 'axios';
 
 import {login} from '../../store/user.redux.js';
@@ -41,11 +41,13 @@ class Login extends React.Component {
     return (
       <div>
         <Logo></Logo>
-      {this.props.isAuth ? <Redirect to={this.props.redirectTo} /> : null}
+          {this.props.isAuth ? <Redirect to={this.props.redirectTo} /> : null}
         <WingBlank>
           <List>
-            <InputItem onChange={v=>this.handleChange('user',v)}>用户：</InputItem>
-          <InputItem type="password" onChange={v=>this.handleChange('pwd',v)}>密码：</InputItem>
+            <InputItem onChange={v=>this.handleChange('user',v)} clear={this.props.msg}>用户：
+            </InputItem>
+          <InputItem type="password" onChange={v=>this.handleChange('pwd',v)} clear={this.props.msg}>密码：
+          </InputItem>
           </List>
           <WhiteSpace/>
           <Button type="primary" onClick={this.handleLogin}>登录</Button>

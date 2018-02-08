@@ -2,13 +2,18 @@
  * @Author: yuanmanxue
  * @Date:   2018-02-06 02:55:42
  * @Last modified by:   yuanmanxue
- * @Last modified time: 2018-02-07 02:20:47
+ * @Last modified time: 2018-02-08 04:24:23
  */
  import React, { Component } from 'react';
  import axios from 'axios';
  import { withRouter } from 'react-router-dom';
-
+import { connect } from 'react-redux'
+import { loadData } from '../../store/user.redux'
 @withRouter
+@connect(
+	null,
+	{loadData}
+)
  class AutoRouter extends React.Component{
    constructor(props){
      super(props)
@@ -25,6 +30,7 @@
        if(res.status == 200) {
          if(res.data.code == 0) {
            // 有登录信息
+           this.props.loadData(res.data.data)
          } else {
            // 没有登录信息
            this.props.history.push('./register')

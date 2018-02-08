@@ -2,13 +2,13 @@
  * @Author: yuanmanxue
  * @Date:   2018-02-06 02:51:10
  * @Last modified by:   yuanmanxue
- * @Last modified time: 2018-02-07 03:44:34
+ * @Last modified time: 2018-02-08 09:29:43
  */
 /**
   * @Author: yuanmanxue
   * @Date:   2018-02-06 08:56:59
  * @Last modified by:   yuanmanxue
- * @Last modified time: 2018-02-07 03:44:34
+ * @Last modified time: 2018-02-08 09:29:43
   */
 
 import React, {Component} from 'react';
@@ -26,7 +26,6 @@ import {
 import {register} from '../../store/user.redux.js';
 import Logo from '../../components/logo/logo.jsx';
 
-
 const RadioItem = Radio.RadioItem;
 @connect(state => state.user, {register})
 class Register extends React.Component {
@@ -39,6 +38,7 @@ class Register extends React.Component {
       type: 'genius'
     }
     this.handleRegister = this.handleRegister.bind(this)
+    this.handleLogin = this.handleLogin.bind(this)
   }
   handleUser(key, value) {
     this.setState({[key]: value})
@@ -55,6 +55,9 @@ class Register extends React.Component {
   handleRegister() {
     this.props.register(this.state)
   }
+  handleLogin() {
+    this.props.history.push('/login')
+  }
   render() {
     return (
       <div>
@@ -69,6 +72,9 @@ class Register extends React.Component {
           </List>
           <WhiteSpace/>
           <Button type="primary" onClick={this.handleRegister}>注册</Button>
+          <WhiteSpace/>
+          <Button type="primary" onClick={this.handleLogin}>登录</Button>
+          <WhiteSpace/>
         </WingBlank>
       </div>
     )

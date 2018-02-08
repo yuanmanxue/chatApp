@@ -2,7 +2,7 @@
  * @Author: yuanmanxue
  * @Date:   2018-02-06 08:56:59
  * @Last modified by:   yuanmanxue
- * @Last modified time: 2018-02-07 05:35:01
+ * @Last modified time: 2018-02-08 02:29:07
  */
 
 import React, {Component} from 'react';
@@ -41,7 +41,7 @@ class Login extends React.Component {
     return (
       <div>
         <Logo></Logo>
-      {this.props.isAuth ? <Redirect to={this.props.redirectTo} /> : null}
+          {/* {this.props.isAuth ? <Redirect to={this.props.redirectTo} /> : null} */}
         <WingBlank>
           <List>
             <InputItem onChange={v=>this.handleChange('user',v)}>用户：</InputItem>
@@ -49,7 +49,7 @@ class Login extends React.Component {
           </List>
           <WhiteSpace/>
           <Button type="primary" onClick={this.handleLogin}>登录</Button>
-        <WhiteSpace/>
+          <WhiteSpace/>
           <Button type="primary" onClick={this.register}>注册</Button>
         </WingBlank>
       </div>

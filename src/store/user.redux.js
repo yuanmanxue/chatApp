@@ -2,7 +2,7 @@
  * @Author: yuanmanxue
  * @Date:   2018-02-06 08:56:59
  * @Last modified by:   yuanmanxue
- * @Last modified time: 2018-02-08 04:25:39
+ * @Last modified time: 2018-02-09 04:20:36
  */
 
 import axios from 'axios'
@@ -109,3 +109,4 @@ function authSuccess(data) {
 export function loadData(userinfo){
 	return { type:LOAD_DATA, payload:userinfo}
 }
+    

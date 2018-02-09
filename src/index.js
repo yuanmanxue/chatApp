@@ -2,7 +2,7 @@
  * @Author: yuanmanxue
  * @Date:   2018-02-01 05:42:42
  * @Last modified by:   yuanmanxue
- * @Last modified time: 2018-02-08 02:41:11
+ * @Last modified time: 2018-02-09 04:42:02
  */
 
 import React from 'react';
@@ -21,6 +21,7 @@ import Register from './container/register/register.jsx'
 import AutoRouter from './container/autorouter/autorouter.jsx'
 import BossInfo from './container/bossinfo/bossinfo.jsx'
 import GeniusInfo from './container/geniusinfo/geniusinfo.jsx'
+import Dashboard from './components/dashboard/dashboard.jsx'
 // redux 4.5
 const store = createStore(reducers, compose(applyMiddleware(thunk), window.devToolsExtension
   ? window.devToolsExtension()
@@ -36,6 +37,9 @@ ReactDOM.render((
           <Route path="/geniusinfo" component={GeniusInfo}></Route>
           <Route path="/login" component={Login}/>
           <Route path="/register" component={Register}/>
+        {/* 骨架： boss，genius， me 四个页面 存在相同的部分 */}
+        {/* 404 页面 命中 路由没有找到*/}
+        <Route component={Dashboard}></Route>
         </Switch>
       </div>
     </BrowserRouter>

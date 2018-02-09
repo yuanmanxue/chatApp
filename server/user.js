@@ -2,13 +2,15 @@
  * @Author: yuanmanxue
  * @Date:   2018-02-06 03:06:17
  * @Last modified by:   yuanmanxue
- * @Last modified time: 2018-02-08 04:21:46
+ * @Last modified time: 2018-02-09 04:11:33
  */
 const express = require('express')
+// md5加密库
 const utils = require('utility')
 const Router = express.Router()
 const model = require('./model')
 const User = model.getModel('user')
+// 设置pwd返回不显示
 const _filter = {'pwd':0,'__v':0}
 
 Router.get('/list', function(req, res) {
@@ -52,7 +54,7 @@ Router.post('/login',function(req,res){
 Router.post('/update',function(req,res){
 	const userid = req.cookies.userid
 	if (!userid) {
-		return res.json({code:1,msg:'没有cookie'})
+		return res.json({code:1})
 	}
 	const body = req.body
   console.log(body)
@@ -83,7 +85,7 @@ Router.get('/info',function(req, res){
 
 })
 
-
+ // 两层md5加salt的方式来加密
   function md5Pwd(pwd){
   	const salt = 'imooc_is_good_3957x8yza6!@#IUHJh~~'
   	return utils.md5(utils.md5(pwd+salt))

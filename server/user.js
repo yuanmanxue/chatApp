@@ -2,7 +2,7 @@
  * @Author: yuanmanxue
  * @Date:   2018-02-06 03:06:17
  * @Last modified by:   yuanmanxue
- * @Last modified time: 2018-02-09 04:11:33
+ * @Last modified time: 2018-02-10 03:58:05
  */
 const express = require('express')
 // md5加密库
@@ -16,7 +16,7 @@ const _filter = {'pwd':0,'__v':0}
 Router.get('/list', function(req, res) {
   const {type} = req.query
   User.find({type}, function(err, doc) {
-    return res.json({code:0,doc})
+    return res.json({code:0,data:doc})
   })
 })
 Router.post('/register',function(req,res) {
@@ -57,12 +57,12 @@ Router.post('/update',function(req,res){
 		return res.json({code:1})
 	}
 	const body = req.body
-  console.log(body)
 	User.findByIdAndUpdate(userid,body,function(err,doc){
 		const data = Object.assign({},{
 			user:doc.user,
 			type:doc.type
 		},body)
+    console.log(doc)
 		return res.json({code:0,data})
 	})
 })

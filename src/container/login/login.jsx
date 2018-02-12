@@ -1,3 +1,9 @@
+/**
+ * @Author: yuanmanxue
+ * @Date:   2018-02-06 08:56:59
+ * @Last modified by:   yuanmanxue
+ * @Last modified time: 2018-02-10 03:29:00
+ */
 
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
@@ -25,7 +31,6 @@ class Login extends React.Component {
     })
   }
   handleLogin() {
-    console.log(this.state)
     this.props.login(this.state)
   }
   register(){

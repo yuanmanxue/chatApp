@@ -2,7 +2,7 @@
  * @Author: yuanmanxue
  * @Date:   2018-02-06 03:15:05
  * @Last modified by:   yuanmanxue
- * @Last modified time: 2018-02-07 03:36:39
+ * @Last modified time: 2018-02-10 03:24:55
  */
  const mongoose = require('mongoose')
  // 连接app 并且使用imooc集合
@@ -17,12 +17,15 @@ const models = {
     'user':{type:String,require:true},
     'pwd':{type:String,require:true},
     'type':{type:String,require:true},
-    'avator':{type:String},
-    'desc':{type:String},
+    'avatar':{type:String},
+    'job':{type:String},
     'title':{type:String},
+    'desc':{type:String},
+    'address':{type:String},
     // boss
     'company':{type:String},
-    'money':{type:String}
+    'money':{type:String},
+    'demand':{type:String}
   },
   'chat':{
 

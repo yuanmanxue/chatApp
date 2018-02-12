@@ -2,7 +2,7 @@
  * @Author: yuanmanxue
  * @Date:   2018-02-01 05:42:42
  * @Last modified by:   yuanmanxue
- * @Last modified time: 2018-02-09 04:42:02
+ * @Last modified time: 2018-02-10 09:46:12
  */
 
 import React from 'react';
@@ -21,7 +21,7 @@ import Register from './container/register/register.jsx'
 import AutoRouter from './container/autorouter/autorouter.jsx'
 import BossInfo from './container/bossinfo/bossinfo.jsx'
 import GeniusInfo from './container/geniusinfo/geniusinfo.jsx'
-import Dashboard from './components/dashboard/dashboard.jsx'
+import Dashboard from './container/dashboard/dashboard.jsx'
 // redux 4.5
 const store = createStore(reducers, compose(applyMiddleware(thunk), window.devToolsExtension
   ? window.devToolsExtension()

@@ -2,7 +2,7 @@
  * @Author: yuanmanxue
  * @Date:   2018-02-07 03:50:17
  * @Last modified by:   yuanmanxue
- * @Last modified time: 2018-02-07 03:53:29
+ * @Last modified time: 2018-02-10 03:24:06
  */
 
  import React, {Component} from 'react';
@@ -36,10 +36,12 @@ class GeniusInfo extends React.Component{
   render(){
     return (
       <List>
-        <NavBar icon={< Icon type = "left" size = 'lg' onClick={() => this.props.history.go(-1)}/>}>牛人信息完善</NavBar>
-        <AvatarSelect avatar={this.state.avatar} handleSelect={(imgname) => {
+        <NavBar icon={< Icon type = "left" size = 'lg' onClick={() => this.props.history.push('/')}/>}>牛人信息完善</NavBar>
+        <AvatarSelect avatar={this.state.avatar}
+          handleSelect={(imgname) => {
           this.setState({avatar: imgname})
-        }}></AvatarSelect>
+        }}
+        ></AvatarSelect>
         <WingBlank>
           <WhiteSpace/>
         <InputItem onChange={v => this.onChange('job', v)} value={this.state.job}>应聘岗位：</InputItem>

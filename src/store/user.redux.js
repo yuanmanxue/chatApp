@@ -2,7 +2,7 @@
  * @Author: yuanmanxue
  * @Date:   2018-02-06 08:56:59
  * @Last modified by:   yuanmanxue
- * @Last modified time: 2018-02-09 04:20:36
+ * @Last modified time: 2018-02-11 01:40:43
  */
 
 import axios from 'axios'
@@ -12,13 +12,12 @@ import {getRedirectPath} from './util.js'
 const AUTH_SUCCESS = 'AUTH_SUCCESS'
 const ERROE_MSG = 'ERROE_MSG'
 const LOAD_DATA = 'LOAD_DATA'
+const LOGIN_OUT = 'LOGIN_OUT'
 const initState = {
   redirectTo:'',
   user: '',
-  pwd: '',
   isRegister:false,
   isLogin:false,
-  repeatpwd: '',
   type: '',
   msg: ''
 }
@@ -29,8 +28,8 @@ export function user(state = initState, action) {
       return {
         ...state,
         msg: '',
-        redirectTo:getRedirectPath(action.playload),
-        ...action.playload
+        redirectTo:getRedirectPath(action.payload),
+        ...action.payload
       }
     case LOAD_DATA:
       return {...state, ...action.payload}
@@ -39,6 +38,11 @@ export function user(state = initState, action) {
         ...state,
         isAuth: false,
         msg: action.msg
+      }
+    case LOGIN_OUT:
+      return {
+        ...initState,
+        redirectTo:'/login'
       }
     default:
       return state
@@ -89,8 +93,9 @@ export function update(data){
       .then(res => {
         if(res.status == 200 && res.data.code == 0){
           Toast.success('保存成功！',1,null,true)
+          console.log(res.data.data)
           setTimeout(() => {
-            dispatch(authSuccess(res.data.data))
+            dispatch(authSuccess({...res.data.data}))
           },1000)
         } else {
           dispatch(errorMsg(res.data.msg))
@@ -104,9 +109,12 @@ function errorMsg(msg) {
   return {msg, type: ERROE_MSG}
 }
 function authSuccess(data) {
-  return {type: AUTH_SUCCESS, playload: data}
+  console.log(data)
+  return {type: AUTH_SUCCESS, payload: data}
 }
 export function loadData(userinfo){
 	return { type:LOAD_DATA, payload:userinfo}
 }
-    
+export function loginOutSubmit(){
+  return {type:LOGIN_OUT}
+}

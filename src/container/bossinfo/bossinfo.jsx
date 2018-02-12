@@ -2,7 +2,7 @@
  * @Author: yuanmanxue
  * @Date:   2018-02-07 03:50:34
  * @Last modified by:   yuanmanxue
- * @Last modified time: 2018-02-08 04:28:50
+ * @Last modified time: 2018-02-10 03:24:31
  */
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
@@ -38,9 +38,12 @@ class BossInfo extends React.Component {
     return (
       <List>
         <NavBar icon={< Icon type = "left" size = 'lg' onClick={() =>this.props.history.go(-1)} />}>BOSS信息完善</NavBar>
-        <AvatarSelect avatar={this.state.avatar} handleSelect={(imgname) => {
+        <AvatarSelect
+          avatar={this.state.avatar}
+          handleSelect={(imgname) => {
           this.setState({avatar: imgname})
-        }}></AvatarSelect>
+        }}
+        ></AvatarSelect>
         <WingBlank>
           <WhiteSpace/>
           <InputItem onChange={v => this.onChange('job', v)}>招聘职位：</InputItem>
